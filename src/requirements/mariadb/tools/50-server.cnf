@@ -15,6 +15,7 @@
 port					= 3306
 user                    = mysql
 pid-file                = /run/mysqld/mysqld.pid
+socket                  = /run/mysqld/mysqld.sock
 basedir                 = /usr
 datadir                 = /var/lib/mysql
 tmpdir                  = /tmp
@@ -28,7 +29,7 @@ skip-external-locking
 
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
-bind-address            = 127.0.0.1
+bind-address            = *
 
 #
 # * Fine Tuning
