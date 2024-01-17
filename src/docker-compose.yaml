@@ -13,7 +13,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress:var/www/wordpress
+      - wordpress:/var/www/
     restart: on-failure
 
   mariadb:
@@ -35,7 +35,7 @@ services:
       - inception
     env_file: .env
     volumes:
-      - wordpress:var/www/wordpress
+      - wordpress:/var/www/
     depends_on:
       - mariadb
     restart: on-failure
@@ -46,15 +46,16 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/vbrouwer/data/mariadb
+            device: /home/victor/data/mariadb
 
     wordpress:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/vbrouwer/data/wordpress
+            device: /home/victor/data/wordpress
    
 networks:
   inception:
-  driver: bridge
+    # driver: bridge
+    name: inception

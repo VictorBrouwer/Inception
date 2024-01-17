@@ -1,19 +1,23 @@
 #!/bin/bash
 
+# Exit immediately on command error
+set -e
+
 # wp config create	--allow-root \
 # --dbname=$SQL_DATABASE \
 # --dbuser=$SQL_USER \
 # --dbpass=$SQL_PASSWORD \
 # --dbhost=mariadb:3306 --path='/var/www/wordpress'
 
+if [ ! -f "/var/www/wp-config.php" ]; then
 echo "Creating config"
 wp-cli config create\
 	--allow-root\
 	--path=/var/www\
 	--dbname="$DB_NAME"\
 	--dbuser="$DB_USER"\
-	--dbpass="$DB_USER_PASSWORD"
-	--dbhost="$DB_HOST"\
+	--dbpass="$DB_USER_PASSWORD"\
+	--dbhost="$DB_HOST"
 
 echo "Running wp core install"
 wp-cli core install\
@@ -34,6 +38,7 @@ wp-cli user create\
 	--path=/var/www\
 	--role="$WP_USER_ROLE"\
 	--user_pass="$WP_USER_PASSWORD"
+fi
 
 echo "Running fpm"
-/usr/sbin/php-fpm7.4 -F
+/usr/sbin/php-fpm7.4 --nodaemonize
