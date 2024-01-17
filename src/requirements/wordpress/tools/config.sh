@@ -3,12 +3,6 @@
 # Exit immediately on command error
 set -e
 
-# wp config create	--allow-root \
-# --dbname=$SQL_DATABASE \
-# --dbuser=$SQL_USER \
-# --dbpass=$SQL_PASSWORD \
-# --dbhost=mariadb:3306 --path='/var/www/wordpress'
-
 if [ ! -f "/var/www/wp-config.php" ]; then
 echo "Creating config"
 wp-cli config create\
