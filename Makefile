@@ -1,16 +1,3 @@
-# NAME = inception
-
-# LIST_CONTAINTERS := $(shell docker ps -a -q
-
-# LIST_VOLUMES := $(shell docker volume ls -q)
-
-# all:
-#     mkdir -p /home/vbrouwer/data/mariadb
-#     mkdir -p /home/vbrouwer/data/wordpress
-#     docker-compose -f srcs/docker-compose.yml up --build -d
-
-
-
 PROJECT_DIR = src
 
 # Export .env its lines as environment variables
@@ -32,11 +19,6 @@ up:
 .PHONY: down
 down:
 	docker compose --project-directory $(PROJECT_DIR) down
-
-# `--insecure` is necessary to circumvent curl's self-signed certificate error
-.PHONE: connect
-connect:
-	curl --insecure https://localhost
 
 # $$ is an escaped $, and it gives sh, rather than Make, the chance to expand it
 # 2> /dev/null ignores errors when $$(docker ps -qa) expands to an empty result
