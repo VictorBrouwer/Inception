@@ -4,7 +4,8 @@ PROJECT_DIR = src
 # Note that this breaks if the $ characters in .env haven't been replaced with $$
 # See https://unix.stackexchange.com/a/348432
 
-include $(PROJECT_DIR)/.env
+
+-include $(PROJECT_DIR)/.env
 export $(shell sed 's/=.*//' $(PROJECT_DIR)/.env)
 
 # --project-directory tells docker which directory docker-compose.yml is in
@@ -12,12 +13,15 @@ export $(shell sed 's/=.*//' $(PROJECT_DIR)/.env)
 # --build rebuilds images before starting the containers
 # --detach runs the containers in the background
 # --remove-orphans removes containers for services not defined in the Compose file
-.PHONY: up
+.PHONY: up env
 up:
 	mkdir -p $(MARIADB_VOLUME) $(WORDPRESS_VOLUME)
 	docker compose --project-directory $(PROJECT_DIR) up --build --detach --remove-orphans
 
-.PHONY: down
+env:
+	cp ~/.env "$(PROJECT_DIR)/.env";
+
+.PHONY: down 
 down:
 	docker compose --project-directory $(PROJECT_DIR) down
 
