@@ -3,6 +3,7 @@ PROJECT_DIR = src
 # Export .env its lines as environment variables
 # Note that this breaks if the $ characters in .env haven't been replaced with $$
 # See https://unix.stackexchange.com/a/348432
+
 include $(PROJECT_DIR)/.env
 export $(shell sed 's/=.*//' $(PROJECT_DIR)/.env)
 
